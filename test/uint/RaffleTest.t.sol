@@ -34,7 +34,7 @@ contract TestRaffle is Test {
         _;
     }
 
-    modifier skipFork(){
+    modifier skipFork() {
         if (block.chainid != 31337) {
             return;
         }
@@ -186,11 +186,7 @@ contract TestRaffle is Test {
         VRFCoordinatorV2_5Mock(vrfCoordinator).fulfillRandomWords(randomRequestId, address(raffle));
     }
 
-    function testFulfillRandomWordsPickAWinnerResetAndSendsMoney()
-        external 
-        raffleEnteredAndTimePassed 
-        skipFork
-        {
+    function testFulfillRandomWordsPickAWinnerResetAndSendsMoney() external raffleEnteredAndTimePassed skipFork {
         // Arrange
         uint256 additionalEnterants = 5;
         uint256 startingIndex = 1;

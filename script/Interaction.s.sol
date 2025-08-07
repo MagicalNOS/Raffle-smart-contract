@@ -11,11 +11,11 @@ import {LinkToken} from "test/mocks/LinkToken.sol";
 contract CreateSubscription is Script {
     function createSubscriptionsUsingConfig() public returns (uint256) {
         HelperConfig config = new HelperConfig();
-        (,,,,,, address vrfCoordinator,,uint256 deployKey) = config.activeNetworkConfig();
+        (,,,,,, address vrfCoordinator,, uint256 deployKey) = config.activeNetworkConfig();
         return createSubscription(vrfCoordinator, deployKey);
     }
 
-    function createSubscription(address vrfCoordinator,uint256 deployKey) public returns (uint256 subscriptionId) {
+    function createSubscription(address vrfCoordinator, uint256 deployKey) public returns (uint256 subscriptionId) {
         console.log("Create Subscription on ChainID: ", block.chainid);
         vm.startBroadcast(deployKey);
         subscriptionId = VRFCoordinatorV2_5Mock(vrfCoordinator).createSubscription();
@@ -30,7 +30,7 @@ contract CreateSubscription is Script {
 }
 
 contract FundScription is Script {
-    uint256 constant FUND_AMOUNT = 3e18; // 3 LINK
+    uint256 FUND_AMOUNT = 3e18; // 3 LINK
 
     function fundSubscriptionUsingConfig() public {
         HelperConfig config = new HelperConfig();
@@ -45,9 +45,8 @@ contract FundScription is Script {
         if (block.chainid == 31337) {
             LinkToken link = LinkToken(linkToken);
             link.mint(msg.sender, 100 ether);
-            VRFCoordinatorV2_5Mock(vrfCoordinator).fundSubscription(subId, 100 ether);
             link.approve(vrfCoordinator, 100 ether);
-
+            VRFCoordinatorV2_5Mock(vrfCoordinator).fundSubscription(subId, 100 ether);
         } else {
             vm.startBroadcast();
             LinkToken(linkToken).transferAndCall(vrfCoordinator, FUND_AMOUNT, abi.encode(subId));
@@ -80,7 +79,7 @@ contract AddConsumer is Script {
 
     function addConsumerUsingConfig() public {
         HelperConfig config = new HelperConfig();
-        (,,, uint256 subId,,, address vrfCoordinator,,uint256 deployKey) = config.activeNetworkConfig();
+        (,,, uint256 subId,,, address vrfCoordinator,, uint256 deployKey) = config.activeNetworkConfig();
         addConsumer(address(raffle), vrfCoordinator, subId, deployKey);
     }
 }

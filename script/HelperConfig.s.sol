@@ -4,6 +4,7 @@ pragma solidity ^0.8.18;
 import {VRFCoordinatorV2_5Mock} from "@chainlink/contracts/src/v0.8/vrf/mocks/VRFCoordinatorV2_5Mock.sol";
 import {LinkToken} from "test/mocks/LinkToken.sol";
 import {Script} from "forge-std/Script.sol";
+
 uint256 constant ANVIL_PRIVATE_KEY = 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80;
 
 contract HelperConfig is Script {
@@ -26,6 +27,8 @@ contract HelperConfig is Script {
             activeNetworkConfig = getMainnetConfig();
         } else if (block.chainid == 11155111) {
             activeNetworkConfig = getSepoliaConfig();
+        } else if (block.chainid == 43113) {
+            activeNetworkConfig = getFujiConfig();
         } else {
             activeNetworkConfig = getAnvilConfig();
         }
@@ -56,10 +59,24 @@ contract HelperConfig is Script {
             keyHash: 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae,
             subscriptionId: 62911309000624671492123550965857525185080086208402805655736826510206179285542,
             requestConfirmations: 3,
-            callbackGasLimit: 2500000,
+            callbackGasLimit: 70000,
             vrfCoordinator: 0x9DdfaCa8183c41ad55329BdeeD9F6A8d53168B1B,
             linkToken: 0x779877A7B0D9E8603169DdbD7836e478b4624789,
             deploykey: vm.envUint("SEPOLIA_PRIVATE_KEY")
+        });
+    }
+
+    function getFujiConfig() internal view returns (NetworkConfig memory) {
+        return NetworkConfig({
+            entranceFee: 0.01 ether,
+            interval: 1 minutes,
+            keyHash: 0xc799bd1e3bd4d1a41cd4968997a4e03dfd2a3c7c04b695881138580163f42887,
+            subscriptionId: 66077457768715301914705374748537368848790726448381402702658780467585662274570,
+            requestConfirmations: 3,
+            callbackGasLimit: 70000,
+            vrfCoordinator: 0x5C210eF41CD1a72de73bF76eC39637bB0d3d7BEE,
+            linkToken: 0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846,
+            deploykey: vm.envUint("FUJI_PRIVATE_KEY")
         });
     }
 

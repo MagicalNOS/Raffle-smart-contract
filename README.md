@@ -6,12 +6,12 @@ A decentralized raffle system built with Solidity and Foundry, leveraging Chainl
 
 - **Provably Fair Randomness**: Uses Chainlink VRF to ensure tamper-proof random number generation
 - **Automated Execution**: Leverages Chainlink Automation for trustless raffle draws
-- **Multi-Network Support**: Deployable on localhost (Anvil) and Sepolia testnet
+- **Multi-Network Support**: Deployable on localhost (Anvil) and Fuji testnet
 - **Comprehensive Testing**: Full test suite with Foundry framework
 
-## Etherscan-Example
+## Fuji-Example
  
-https://sepolia.etherscan.io/address/0x710eaa17c9c3434e998755d89f15a48815ec7efa#code
+https://testnet.snowtrace.io/address/0x30c14bd55f6cab7f8fccb764e64fd188c6ef4f65
 
 ## Prerequisites
 
@@ -92,7 +92,7 @@ make deploy
 #### Deploy to Sepolia Testnet
 
 ```bash
-make deploy ARGS="--network sepolia"
+make deploy ARGS="--network fuji"
 ```
 
 ### Chainlink Integration
@@ -106,7 +106,7 @@ The project includes scripts for Chainlink VRF and Automation setup:
 make createSubscription
 
 # Sepolia
-make createSubscription ARGS="--network sepolia"
+make createSubscription ARGS="--network fuji"
 ```
 
 #### Add Consumer Contract
@@ -116,7 +116,7 @@ make createSubscription ARGS="--network sepolia"
 make addConsumer
 
 # Sepolia
-make addConsumer ARGS="--network sepolia"
+make addConsumer ARGS="--network fuji"
 ```
 
 #### Fund VRF Subscription
@@ -126,7 +126,7 @@ make addConsumer ARGS="--network sepolia"
 make fundSubscription  
 
 # Sepolia
-make fundSubscription ARGS="--network sepolia"
+make fundSubscription ARGS="--network fuji"
 ```
 
 ## Project Structure
