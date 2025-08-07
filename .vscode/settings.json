@@ -1,0 +1,22 @@
+{
+  "wake.compiler.solc.remappings": [
+    "@chainlink/contracts/src/v0.8/vrf/=lib/chainlink-evm/contracts/src/v0.8/vrf/",
+    "chainlink-evm/=lib/chainlink-evm/",
+    "forge-std/=lib/forge-std/src/"
+  ],
+  "solidity.packageDefaultDependenciesContractsDirectory": "src",
+  "solidity.packageDefaultDependenciesDirectory": "lib",
+  "editor.formatOnSave": true,
+  "[solidity]": {
+    "editor.defaultFormatter": "JuanBlanco.solidity"
+  },
+  "solidity.formatter": "forge",
+  "solidity.compileUsingRemoteVersion": "v0.8.30",
+  "solidity.remappings": [
+    "@chainlink/=lib/chainlink-evm/",
+    "@openzeppelin/=lib/openzeppelin-contracts/",
+    "@solmate/tokens/=lib/solmate/src/tokens/"
+  ],
+  "solidity.monoRepoSupport": false
+
+}
